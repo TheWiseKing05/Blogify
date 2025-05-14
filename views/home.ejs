@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Homepage</title>
+  </head>
+  <body>
+    <%- include('partials/nav') %>
+
+    <div class="container mt-3">
+      <% if (blogs.length === 0) { %>
+      <div class="text-center p-5">
+        <img src="/emptyBlog.png" alt="No blogs" style="max-width: 300px" />
+        <h3 class="mt-4">No blog posts yet</h3>
+        <p>Be the first to share your thoughts!</p>
+        <button id="createBlogBtn" class="btn btn-primary mt-3">
+          Create a Blog
+        </button>
+
+        <!-- Hidden error message -->
+        <div
+          id="errorMessage"
+          class="alert alert-danger mt-3"
+          style="display: none"
+        >
+          You need to be a user to post blogs.
+        </div>
+
+        <% if (user) { %>
+        <script type="text/javascript">
+          document.getElementById("createBlogBtn").onclick = function () {
+            window.location.href = "/blog/add-new";
+          };
+        </script>
+        <% } else { %>
+        <script type="text/javascript">
+          document.getElementById("createBlogBtn").onclick = function (event) {
+            event.preventDefault(); // Prevent the default button action
+            // Show the error message on the page
+            document.getElementById("errorMessage").style.display = "block";
+          };
+        </script>
+        <% } %>
+      </div>
+      <% } else { %>
+      <div class="row row-cols-4">
+        <% blogs.forEach(blog => { %>
+        <div class="col">
+          <div class="card col" style="width: 18rem">
+            <img src="<%= blog.coverImageURL %>" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title"><%= blog.title %></h5>
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+
+    <%- include('./partials/scripts') %>
+  </body>
+</html>
