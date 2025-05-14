@@ -36,7 +36,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
 
-app.use(express.static(path.resolve("./public")));
 app.use(express.static("public"));
 // Handle GET requests to the root URL
 app.get("/", async (req, res) => {
