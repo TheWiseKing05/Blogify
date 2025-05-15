@@ -1,4 +1,6 @@
 
+You can view the site through this link: https://blogify-production-dbff.up.railway.app/
+
 # Welcome to Blogify – My First Blog Post!
 
 Hello world! 🌍
